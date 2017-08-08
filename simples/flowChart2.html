@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flowchart</title>
+    <meta charset="UTF-8">
+    <script src="../release/go.js"></script>
+</head>
+<body>
+<div id="myDiagramDiv" style="width:600px; height:450px; background-color: #DAE4E4;"></div>
+
+<script>
+    /*Diagrams*/
+    var $ = go.GraphObject.make;
+    var myDiagram = $(go.Diagram, "myDiagramDiv",{
+        initialContentAlignment:go.Spot.Center,
+        allowDrop: true,
+        "animationManager.duration": 800, // slightly longer than default (600ms) animation
+        "undoManager.isEnabled": true  // enable undo & redo
+    });
+
+    var myModel = $(go.Model);//创建Model对象
+    // model中的数据每一个js对象都代表着一个相应的模型图中的元素
+    myModel.nodeDataArray = [
+        { key: "Alpha" },
+        { key: "Beta" },
+        { key: "Gamma" }
+    ];//其实就是个普通json对象属性随便加，内部渲染时根据json里面的值设置节点的相应属性
+    myDiagram.model = myModel;
+    myDiagram.nodeTemplate = $(go.Node, $(go.Shapes,new go.Binding("text", "key")))
+
+
+
+</script>
+</body>
+</html>
